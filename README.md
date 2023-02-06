@@ -30,11 +30,14 @@
 
 ```
 
+それはそうと、processingはプログラムのファイル名とディレクトリ名は一致させる必要があるらしい。
+
 ## その他メモ
 
 - [Reference / Processing.org](https://processing.org/reference)
-
-processingはプログラムのファイル名とディレクトリ名は一致させる必要があるらしい。  
+  - 公式リファレンス
+- [Processingでゼロから学ぶプログラミング・ビジュアルアート - cocopon.me](https://cocopon.me/zero-pde/)
+  - わかりやすい
 
 ## ちなみに
 
