@@ -30,8 +30,12 @@
 
 ```
 
-# その他メモ
+## その他メモ
 
 - [Reference / Processing.org](https://processing.org/reference)
 
 processingはプログラムのファイル名とディレクトリ名は一致させる必要があるらしい。  
+
+## ちなみに
+
+試しにScalaで書いたら動いた
