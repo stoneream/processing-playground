@@ -46,7 +46,7 @@ lazy val publishSettings = Seq(
 // === project setting ===
 
 lazy val root = (project in file(".")).settings(
-  name := "processing-scala",
+  name := "processing-playground",
   libraryDependencies ++= Seq(
     "org.processing" % "core" % "3.3.7",
     "org.scalatest" %% "scalatest" % "3.2.14" % Test
