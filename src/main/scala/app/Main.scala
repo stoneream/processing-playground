@@ -4,8 +4,12 @@ import processing.core.PApplet
 
 class PAppletImpl extends PApplet {
 
+  private val w = 1280
+  private val h = 640
+  private val tikaTika = TikaTika(w, h, 20)
+
   override def settings(): Unit = {
-    size(600, 400)
+    size(w, h)
   }
 
   override def setup(): Unit = {
@@ -15,11 +19,15 @@ class PAppletImpl extends PApplet {
   override def draw(): Unit = {
     background(255)
 
-    fill(255, 0, 0)
-    textSize(52)
-    text("HELLO?", 100, 100)
+    tikaTika.f.foreach { case (x, y, (r, g, b)) =>
+      fill(r, g, b)
+      rect(x, y, tikaTika.size, tikaTika.size)
+    }
 
-    println(frameCount)
+    // render debug info
+    textSize(24)
+    fill(255, 0, 0, 127)
+    text(s"fps $frameRate", 10, 24)
   }
 }
 
