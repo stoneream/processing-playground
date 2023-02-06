@@ -26,17 +26,7 @@
         "--sketch=${fileDirname}",
         "--run"
       ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      }
-    }
-  ]
-}
+...
 
 ```
 
