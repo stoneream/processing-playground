@@ -1,12 +1,14 @@
 package app
 
+import app.section1.DivRect
 import processing.core.PApplet
+import processing.core.PConstants.HSB
 
 class PAppletImpl extends PApplet {
 
-  private val w = 1280
-  private val h = 640
-  private val tikaTika = TikaTika(w, h, 20)
+  private val w = 500
+  private val h = 500
+  private val divRect = DivRect.calc(10, 6)
 
   override def settings(): Unit = {
     size(w, h)
@@ -14,20 +16,16 @@ class PAppletImpl extends PApplet {
 
   override def setup(): Unit = {
     frameRate(60)
+    colorMode(HSB, 1)
   }
 
   override def draw(): Unit = {
-    background(255)
-
-    tikaTika.f.foreach { case (x, y, (r, g, b)) =>
-      fill(r, g, b)
-      rect(x, y, tikaTika.size, tikaTika.size)
+    background(1)
+    divRect.foreach { case ((xPos, yPos), width) =>
+      val col = color(random(1), 1, 1)
+      fill(col)
+      rect(xPos, yPos, width, width)
     }
-
-    // render debug info
-    textSize(24)
-    fill(255, 0, 0, 127)
-    text(s"fps $frameRate", 10, 24)
   }
 }
 
