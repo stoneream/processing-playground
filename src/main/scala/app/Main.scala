@@ -1,6 +1,6 @@
 package app
 
-import app.section4.{RecurSquare, Spiral}
+import app.section4.RecurSquare
 import processing.core.PApplet
 
 object Main extends App {
