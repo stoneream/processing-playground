@@ -7,7 +7,6 @@ class RecurPolygon extends PApplet {
   private val w = 1000
   private val h = 1000
 
-  private val gap = 0.1f
   private val gon = 18
 
   private val initVec = (0 to gon).map { i =>
@@ -15,6 +14,8 @@ class RecurPolygon extends PApplet {
     val n = w / 2f
     PVector.fromAngle(angle.toFloat).mult(n)
   }.toList
+
+  private val resetCount = 300
 
   def diagonal(ls: List[PVector]): List[(PVector, PVector)] = {
     val head :: tail = ls
@@ -24,14 +25,16 @@ class RecurPolygon extends PApplet {
     ls.zip(ls2)
   }
 
-  def f(resetFrameCount: Int): List[List[PVector]] = {
-    (0 to resetFrameCount).foldLeft(initVec :: Nil) { case (z, frameCount) =>
-      val head :: tail = z
-      diagonal(head).map { case (v1, v2) =>
-        val dir = PVector.sub(v2, v1).mult(gap)
-        PVector.add(v1, dir)
-      } :: z
-    }
+  def f(gap: Float = 0.15f, resetCount: Int)(currentFrameCount: Int): List[List[PVector]] = {
+    (0 to Math.min(resetCount, currentFrameCount))
+      .foldLeft(initVec :: Nil) { case (z, frameCount) =>
+        val head :: tail = z
+        diagonal(head).map { case (v1, v2) =>
+          val dir = PVector.sub(v2, v1).mult(gap)
+          PVector.add(v1, dir)
+        } :: z
+      }
+      .reverse
   }
 
   override def settings(): Unit = {
@@ -45,7 +48,9 @@ class RecurPolygon extends PApplet {
   override def draw(): Unit = {
     translate(width / 2, height / 2)
 
-    f(300).reverse.take(frameCount % 300).foreach { vec =>
+    background(255, 255, 255)
+
+    f(resetCount = resetCount)(frameCount).take(frameCount % resetCount).foreach { vec =>
       diagonal(vec).foreach { case (v1, v2) =>
         line(v1.x, v1.y, v2.x, v2.y)
       }
