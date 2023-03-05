@@ -17,16 +17,23 @@ class RecurPolygon extends PApplet {
 
   private val resetCount = 300
 
+  // 対角
   def diagonal(ls: List[PVector]): List[(PVector, PVector)] = {
     val head :: tail = ls
     val ls2 = (head :: tail.reverse).reverse
-    // topLeft :: topRight :: bottomRight :: bottomLeft :: Nil
-    // topRight :: bottomRight :: bottomLeft :: topLeft :: Nil
     ls.zip(ls2)
   }
 
+  /**
+   * @param gap 内接する正多角形のズレ
+   * @param resetFrameCount 何フレームで書き直すか
+   * @param currentFrameCount 現在のフレームカウント
+   * @return
+   */
   def f(gap: Float = 0.15f, resetFrameCount: Int)(currentFrameCount: Int): List[List[PVector]] = {
-    (0 to Math.min(resetFrameCount, currentFrameCount % resetFrameCount))
+    // 描画しない図形を描画しないようにしてる
+    val n = Math.min(resetFrameCount, currentFrameCount % resetFrameCount)
+    (0 to n)
       .foldLeft(initVec :: Nil) { case (z, frameCount) =>
         val head :: tail = z
         diagonal(head).map { case (v1, v2) =>
