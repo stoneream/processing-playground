@@ -53,10 +53,18 @@ class RecurPolygon extends PApplet {
   }
 
   override def draw(): Unit = {
-    translate(width / 2, height / 2)
-
     background(255, 255, 255)
 
+    // debug print
+    val txt =
+      s"""fps = $frameRate
+         |frameCount = $frameCount
+         |""".stripMargin
+    fill(255, 0, 0)
+    textSize(24)
+    text(txt, 50, 100)
+
+    translate(width / 2, height / 2)
     f(resetFrameCount = resetCount)(frameCount).foreach { vec =>
       diagonal(vec).foreach { case (v1, v2) =>
         line(v1.x, v1.y, v2.x, v2.y)
