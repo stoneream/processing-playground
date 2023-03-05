@@ -25,8 +25,8 @@ class RecurPolygon extends PApplet {
     ls.zip(ls2)
   }
 
-  def f(gap: Float = 0.15f, resetCount: Int)(currentFrameCount: Int): List[List[PVector]] = {
-    (0 to Math.min(resetCount, currentFrameCount % resetCount))
+  def f(gap: Float = 0.15f, resetFrameCount: Int)(currentFrameCount: Int): List[List[PVector]] = {
+    (0 to Math.min(resetFrameCount, currentFrameCount % resetFrameCount))
       .foldLeft(initVec :: Nil) { case (z, frameCount) =>
         val head :: tail = z
         diagonal(head).map { case (v1, v2) =>
@@ -50,7 +50,7 @@ class RecurPolygon extends PApplet {
 
     background(255, 255, 255)
 
-    f(resetCount = resetCount)(frameCount).foreach { vec =>
+    f(resetFrameCount = resetCount)(frameCount).foreach { vec =>
       diagonal(vec).foreach { case (v1, v2) =>
         line(v1.x, v1.y, v2.x, v2.y)
       }
